@@ -1,0 +1,47 @@
+#!/bin/sh
+
+if [ $# -ge 1 ]; then
+    USER=$1
+fi
+
+HOME=$(getent passwd $USER | cut -d: -f6)
+
+if [ -z "$HOME" ]; then
+    echo "Can't find home directory for user $USER"
+    exit 1
+fi
+
+if ! [ -d /home ]; then
+    if [ -h /home ]; then
+        mkdir -p $(readlink /home)
+    else
+        mkdir /home
+    fi
+fi
+
+if [ -d $HOME ]; then
+    : # Everything is ok
+else
+    if [ -h $HOME ]; then
+        #
+        # Symlinks should be dereferenced
+        #
+        MK_HOME=$HOME
+        while :; do
+            T=$(readlink $MK_HOME)
+            if [ $? -ne 0 ]; then
+                break
+            fi
+            MK_HOME=$T
+        done
+    else
+        MK_HOME=$HOME
+    fi
+
+    if [ -e $MK_HOME ]; then
+        mv -f $MK_HOME $MK_HOME.old
+    fi
+    mkdir -m755 -p $MK_HOME
+    GROUP=$(getent passwd $USER | cut -d: -f4)
+    chown $USER:$GROUP $MK_HOME
+fi

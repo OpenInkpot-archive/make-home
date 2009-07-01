@@ -1,0 +1,2 @@
+01make-home etc/X11/Xsession.d
+make-home usr/bin

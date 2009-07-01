@@ -1,0 +1,15 @@
+Source: make-home
+Section: gui
+Priority: optional
+Maintainer: Mikhail Gusarov <dottedmag@dottedmag.net>
+Standards-Version: 3.8.0
+Build-Depends: debhelper (>= 7)
+XCS-Cross-Host-Build-Depends: debhelper (>= 7)
+
+Package: make-home
+Architecture: all
+Depends: x11-common (>= 1:7.3+13)
+Description: Makes $HOME during graphical login
+ Due to lack of PAM it is necessary to hook into graphical login session
+ to make $HOME of users instead of using pam_mkdirs.
+
