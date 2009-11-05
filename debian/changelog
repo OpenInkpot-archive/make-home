@@ -1,3 +1,9 @@
+make-home (0.2) asimov; urgency=low
+
+  * Move 01make-home to 09make-home to have a place for checkfs.
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Thu, 05 Nov 2009 16:32:01 +0600
+
 make-home (0.1) asimov; urgency=low
 
   * First build for OpenInkpot.
