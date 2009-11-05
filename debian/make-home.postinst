@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+#DEBHELPER#
+
+# Ugh. Conffiles!
+if [ "$1" = "configure" ]; then
+    rm -f /etc/X11/Xsession.d/01make-home
+fi
